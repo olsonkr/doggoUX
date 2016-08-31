@@ -1,0 +1,12 @@
+{
+  "appname": "OrderCloud OOUX",
+  "firebasedatabaseurl": "https://ordercloud-ooux.firebaseio.com",
+  "firebaseauthdomain": "ordercloud-ooux.firebaseapp.com",
+  "firebaseapikey": "AIzaSyDBHRIZXPrc7_CsNH3AnM-5BPatbpWOGCA",
+  "base": {
+    "left":true,
+    "right":false,
+    "top":true,
+    "bottom":false
+  }
+}
