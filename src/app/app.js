@@ -25,7 +25,8 @@ function FireBaseRun($state, AuthService) {
     AuthService.FireBaseAuthObject.$onAuthStateChanged(function(authData) {
         if (!authData) {
             AuthService.Logout();
-            $state.go('login');
+            console.log($state);
+            if ($state.current.name != 'register') $state.go('login');
         }
     });
 }

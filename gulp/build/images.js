@@ -3,13 +3,13 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     del = require('del');
 
-gulp.task('clean:images-c', function() {
-    return del(config.compile + config.appImages);
+gulp.task('clean:images-b', function() {
+    return del(config.build + config.appImages);
 });
 
-gulp.task('images-c', ['clean:images-b'], function() {
+gulp.task('images-b', ['clean:images-b'], function() {
     return gulp
         .src(config.src + config.appImages + '**/*')
         .pipe(imagemin())
-        .pipe(gulp.dest(config.compile + config.appImages));
+        .pipe(gulp.dest(config.build + config.appImages));
 });
