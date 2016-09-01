@@ -1,6 +1,5 @@
 angular.module('orderCloud')
 	.directive('ordercloudLogo', ordercloudLogo)
-	.directive('oouxLogo', oouxLogo)
 ;
 
 function ordercloudLogo() {

@@ -1,8 +1,8 @@
 {
-  "appname": "OrderCloud OOUX",
-  "firebasedatabaseurl": "https://ordercloud-ooux.firebaseio.com",
-  "firebaseauthdomain": "ordercloud-ooux.firebaseapp.com",
-  "firebaseapikey": "AIzaSyDBHRIZXPrc7_CsNH3AnM-5BPatbpWOGCA",
+  "appname": "doggoUX",
+  "firebasedatabaseurl": "https://doggoux.firebaseio.com",
+  "firebaseauthdomain": "doggoux.firebaseapp.com",
+  "firebaseapikey": "AIzaSyDklsCRodx-THKM2XwmlBSVHoN4lbVKwu0",
   "base": {
     "left":true,
     "right":false,

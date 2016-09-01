@@ -1,5 +1,5 @@
 {
-  "name": "ordercloud-ooux",
+  "name": "doggoUX",
   "authors": [
     "Kyle Olson <kolson@four51.com>",
     "Four51"
@@ -13,7 +13,8 @@
     "AngularJS",
     "Angular",
     "B2B",
-    "OOUX"
+    "OOUX",
+    "doggoUX"
   ],
   "license": "MIT",
   "ignore": [
