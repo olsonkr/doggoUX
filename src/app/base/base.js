@@ -41,17 +41,8 @@ function BaseConfig($stateProvider, $injector) {
         abstract: true,
         views: baseViews,
         resolve: {
-            CurrentUser: function($q, $state, LoginService) {
-                var deferred = $q.defer();
-
-                if (LoginService.IsAuthenticated()) {
-                    deferred.resolve();
-                } else {
-                    $state.go('login');
-                    deferred.resolve();
-                }
-
-                return deferred.promise;
+            CurrentUser: function(AuthService) {
+                return AuthService.FireBaseAuthObject.$requireSignIn();
             }
         }
     };
@@ -59,10 +50,11 @@ function BaseConfig($stateProvider, $injector) {
     $stateProvider.state('base', baseState);
 }
 
-function BaseController($rootScope, $ocMedia, Underscore, snapRemote, defaultErrorMessageResolver, base) {
+function BaseController($rootScope, $ocMedia, $state, snapRemote, defaultErrorMessageResolver, AuthService, CurrentUser, base) {
     var vm = this;
     vm.left = base.left;
     vm.right = base.right;
+    vm.currentUser = CurrentUser;
 
     defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
         errorMessages['customPassword'] = 'Password must be at least eight characters long and include at least one letter and one number';
@@ -98,4 +90,9 @@ function BaseController($rootScope, $ocMedia, Underscore, snapRemote, defaultErr
         if (n === o) return;
         _initDrawers(n);
     });
+
+    vm.logout = function() {
+        AuthService.FireBaseAuthObject.$signOut();
+        $state.go('login');
+    };
 }

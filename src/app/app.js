@@ -21,11 +21,11 @@ angular.module('orderCloud', [
     .config(DatePickerConfig)
 ;
 
-function FireBaseRun($state, LoginService) {
-    LoginService.FireBaseAuthObject.$onAuthStateChanged(function(authData) {
+function FireBaseRun($state, AuthService) {
+    AuthService.FireBaseAuthObject.$onAuthStateChanged(function(authData) {
         if (!authData) {
-            LoginService.Logout();
-            //$state.go('login');
+            AuthService.Logout();
+            $state.go('login');
         }
     });
 }

@@ -1,6 +1,6 @@
 angular.module('orderCloud')
     .config(LoginConfig)
-    .factory('LoginService', LoginService)
+    .factory('AuthService', AuthService)
     .controller('LoginCtrl', LoginController)
 ;
 
@@ -15,25 +15,26 @@ function LoginConfig($stateProvider) {
     ;
 }
 
-function LoginService($firebaseAuth) {
+function AuthService($firebaseAuth) {
     var firebaseAuthObject = $firebaseAuth();
     var service = {
         FireBaseAuthObject: firebaseAuthObject,
         Login: _login,
         Logout: _logout,
+        Register: _register,
         IsAuthenticated: _isAuthenticated
     };
 
-    function _register() {
-        return firebaseAuthObject.$createUserWithEmailAndPassword(user.email, user.password);
-    }
-
-    function _login() {
-        return firebaseAuthObject.$signInWithEmailAndPassword(user.email, user.password);
+    function _login(credentials) {
+        return firebaseAuthObject.$signInWithEmailAndPassword(credentials.Email, credentials.Password);
     }
 
     function _logout() {
         firebaseAuthObject.$signOut();
+    }
+
+    function _register(credentials) {
+        return firebaseAuthObject.$createUserWithEmailAndPassword(credentials.Email, credentials.Password);
     }
 
     function _isAuthenticated() {
@@ -43,6 +44,25 @@ function LoginService($firebaseAuth) {
     return service;
 }
 
-function LoginController() {
+function LoginController($state, toastr, AuthService) {
     var vm = this;
+    vm.credentials = {
+        Email: null,
+        Password: null
+    };
+
+    vm.submit = function() {
+        AuthService.Login(vm.credentials)
+            .then(function() {
+                $state.go('home');
+            })
+            .catch(function(ex) {
+                vm.credentials = {
+                    Email: null,
+                    Password: null
+                };
+                toastr.error(ex.message, 'Error');
+            })
+        ;
+    };
 }
