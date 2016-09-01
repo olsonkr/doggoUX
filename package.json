@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/olsonkr/OOUX.git"
+    "url": "git+https://github.com/olsonkr/doggoUX.git"
   },
   "keywords": [
     "OrderCloud",
@@ -33,9 +33,9 @@
   "author": "Four51 Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/olsonkr/OOUX/issues"
+    "url": "https://github.com/olsonkr/doggoUX/issues"
   },
-  "homepage": "https://github.com/olsonkr/OOUX#readme",
+  "homepage": "https://github.com/olsonkr/doggoUX#readme",
   "dependencies": {
     "bower": "1.7.7",
     "express": "^4.13.4",
