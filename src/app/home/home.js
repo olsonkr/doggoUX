@@ -1,4 +1,4 @@
-angular.module('orderCloud')
+angular.module('doggoUX')
 	.config(HomeConfig)
 	.controller('HomeCtrl', HomeController)
 ;

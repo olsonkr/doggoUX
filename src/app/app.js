@@ -1,4 +1,4 @@
-angular.module('orderCloud', [
+angular.module('doggoUX', [
         'ngSanitize',
         'ngAnimate',
         'ngMessages',

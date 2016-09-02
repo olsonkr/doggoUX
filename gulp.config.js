@@ -62,10 +62,10 @@ module.exports = {
     templateCacheSettings: {
         standalone: false,
         moduleSystem: 'IIFE',
-        module: 'orderCloud'
+        module: 'doggoUX'
     },
     ngConstantSettings: {
-        name: 'orderCloud',
+        name: 'doggoUX',
         deps: false,
         constants: getConstants()
     },

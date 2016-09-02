@@ -1,4 +1,4 @@
-angular.module('orderCloud')
+angular.module('doggoUX')
     .config(LoginConfig)
     .factory('AuthService', AuthService)
     .controller('LoginCtrl', LoginController)

@@ -1,4 +1,4 @@
-angular.module('orderCloud')
+angular.module('doggoUX')
 	.factory('$ocMedia', ocMediaFactory)
 	.constant('MEDIA', MEDIA_CONSTANT)
 	.constant('MEDIA_PRIORITY', MEDIA_PRIORITY_CONSTANT)
