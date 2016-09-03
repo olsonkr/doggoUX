@@ -41,8 +41,16 @@ function BaseConfig($stateProvider, $injector) {
         abstract: true,
         views: baseViews,
         resolve: {
-            CurrentUser: function(AuthService) {
-                return AuthService.FireBaseAuthObject.$requireSignIn();
+            CurrentUser: function($q, $firebaseObject, FireBaseDataService, AuthService) {
+                var deferred = $q.defer();
+
+                AuthService.FireBaseAuthObject.$requireSignIn()
+                    .then(function(data) {
+                        data.Details = $firebaseObject(FireBaseDataService.Users.child(data.uid));
+                        deferred.resolve(data);
+                    });
+
+                return deferred.promise;
             }
         }
     };

@@ -20,31 +20,6 @@ function RegisterController($state, toastr, AuthService) {
         Password: null,
         ConfirmPassword: null
     };
-
-    vm.showIcons = true;
-
-    vm.registerWithGoogle = function() {
-        vm.showIcons = false;
-        vm.emailForm = false;
-        var googleProvider = new firebase.auth.GoogleAuthProvider();
-        googleProvider.addScope('https://www.googleapis.com/auth/plus.login');
-        firebase.auth().signInWithPopup(googleProvider)
-            .then(function(result) {
-                if (result.user.email.indexOf('@four51.com') > -1) {
-                    $state.go('home');
-                } else {
-                    AuthService.FireBaseAuthObject.$deleteUser()
-                        .then(function() {
-                            toastr.error('Google Account must be a valid Four51 account', 'Error');
-                        });
-                }
-            })
-            .catch(function(ex) {
-                toastr.error(ex.message, 'Error');
-            });
-    };
-
-    vm.showEmailForm = false;
     vm.registerWithEmail = function() {
         vm.showIcons = false;
         vm.showEmailForm = true;
@@ -68,7 +43,7 @@ function RegisterController($state, toastr, AuthService) {
                 .then(function() {
                     AuthService.Login(vm.credentials)
                         .then(function() {
-                            $state.go('home');
+                            $state.go('projects');
                         });
                 })
                 .catch(function(ex) {

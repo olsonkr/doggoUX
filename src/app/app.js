@@ -47,7 +47,7 @@ function DatePickerConfig(uibDatepickerConfig, uibDatepickerPopupConfig){
 
 function Routing($urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider) {
     $urlMatcherFactoryProvider.strictMode(false);
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/projects');
     $locationProvider.html5Mode(true);
 }
 

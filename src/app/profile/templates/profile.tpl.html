@@ -1,0 +1,51 @@
+<article id="Profile" class="container" ui-view>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-body">
+                    <figure class="profile-pic">
+                        <img ng-src="{{profile.profile.ProfilePic ? ('assets/images/' + profile.profile.ProfilePic + '.png') : 'assets/images/doggoIcon.png'}}" />
+                    </figure>
+                </div>
+                <div class="panel-footer profile-details">
+                    <div ng-if="profile.profile.Name && !profile.editingName">
+                        <b ng-click="profile.editName()">{{profile.profile.Name}}</b>
+                    </div>
+                    <div ng-if="!profile.profile.Name || profile.editingName">
+                        <div class="input-group name-input">
+                            <input type="text" class="form-control" placeholder="Enter name..." ng-model="profile.profileCopy.Name" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="profile.save(profile.profile)" ng-disabled="!profile.profileCopy.Name">Save</button>
+                            </span>
+                        </div>
+                    </div>
+                    <br />
+                    <span>{{base.currentUser.email}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>Profile Picture</b>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4" ng-repeat="pic in ['1', '2', '3']">
+                            <figure class="profile-pic-option" ng-click="profile.selectProfilePic(pic)">
+                                <img ng-class="{'selected': profile.profile.ProfilePic == pic}" ng-src="{{'assets/images/' + pic + '.png'}}" />
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4" ng-repeat="pic in ['4', '5', '6']">
+                            <figure class="profile-pic-option" ng-click="profile.selectProfilePic(pic)">
+                                <img ng-class="{'selected': profile.profile.ProfilePic == pic}" ng-src="{{'assets/images/' + pic + '.png'}}" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
