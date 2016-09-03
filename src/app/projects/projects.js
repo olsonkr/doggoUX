@@ -10,11 +10,22 @@ function ProjectsConfig($stateProvider) {
             url: '/projects',
             templateUrl: 'projects/templates/projects.tpl.html',
             controller: 'ProjectsCtrl',
-            controllerAs: 'projects'
+            controllerAs: 'projects',
+            resolve: {
+                Projects: function($firebaseArray, FireBaseDataService) {
+                    return $firebaseArray(FireBaseDataService.Projects)
+                }
+            }
         })
     ;
 }
 
-function ProjectsController() {
+function ProjectsController(Projects) {
     var vm = this;
+    vm.projects = Projects;
+
+    vm.tab = 'all';
+    vm.selectTab = function(tab) {
+        vm.tab = tab;
+    };
 }
