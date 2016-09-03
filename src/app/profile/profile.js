@@ -49,6 +49,11 @@ function ProfileController(ProfileService, Profile) {
         vm.save();
     };
 
+    vm.selectProfilePicColor = function(color) {
+        vm.profile.ProfilePicColor = color;
+        vm.save();
+    };
+
     vm.save = function() {
         ProfileService.Save(vm.profile, vm.profileCopy);
         vm.editingName = false;

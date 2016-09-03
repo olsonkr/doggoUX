@@ -23,7 +23,7 @@
                     <ul uib-dropdown-menu>
                         <li class="dropdown-header text-center">
                             {{base.currentUser.Details.Name}} <br>
-                            <img class="nav-profile-pic" ng-if="base.currentUser.Details.ProfilePic" ng-src="{{'assets/images/' + base.currentUser.Details.ProfilePic + '.png'}}">
+                            <img class="nav-profile-pic" ng-if="base.currentUser.Details.ProfilePic" ng-src="{{'assets/images/' + base.currentUser.Details.ProfilePic + '.png'}}" ng-class="{'profile-pic-color-1': (base.currentUser.Details.ProfilePicColor == '1'), 'profile-pic-color-2': (base.currentUser.Details.ProfilePicColor == '2'), 'profile-pic-color-3': (base.currentUser.Details.ProfilePicColor == '3'), 'profile-pic-color-4': (base.currentUser.Details.ProfilePicColor == '4'), 'profile-pic-color-5': (base.currentUser.Details.ProfilePicColor == '5')}">
                         </li>
                         <li class="text-center"><a ui-sref="profile">Profile</a></li>
                         <li class="divider text-center"></li>

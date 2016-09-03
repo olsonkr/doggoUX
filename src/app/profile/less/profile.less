@@ -9,7 +9,9 @@
   .profile-pic {
     padding: 20px;
     img {
-      max-width:200px;
+      max-width: 200px;
+      padding: 20px;
+      border-radius: 40px;
     }
   }
 
@@ -41,5 +43,40 @@
     img:hover {
       opacity: 1;
     }
+  }
+
+  .profile-pic-color {
+    div.color-option {
+      content: ' ';
+      margin: auto;
+      max-width: 50%;
+      height: 30px;
+      border: 1px solid @btn-default-border;
+      border-radius: 10px;
+      opacity: 0.5;
+    }
+    div.color-option.selected {
+      border-color: @brand-primary;
+      opacity: 1;
+    }
+    div.color-option:hover {
+      opacity: 1;
+    }
+  }
+
+  div.color-option#color_1 {
+    background-color: @doggo-profile-pic-blue;
+  }
+  div.color-option#color_2 {
+    background-color: @doggo-profile-pic-green;
+  }
+  div.color-option#color_3 {
+    background-color: @doggo-profile-pic-orange;
+  }
+  div.color-option#color_4 {
+    background-color: @doggo-profile-pic-red;
+  }
+  div.color-option#color_5 {
+    background-color: @doggo-profile-pic-purple;
   }
 }
