@@ -8,18 +8,7 @@
         <div class="panel panel-default">
             <h2 class="text-center">Register</h2>
             <div class="panel-body">
-                <div class="row text-center" ng-if="register.showIcons">
-                    <div class="col-sm-4">
-                        <figure ng-click="register.registerWithGoogle()"><img class="register-icon" src="assets/images/google.svg"/></figure>
-                    </div>
-                    <div class="col-sm-4">
-                        <figure><img class="register-icon" src="assets/images/github.svg" /></figure>
-                    </div>
-                    <div class="col-sm-4">
-                        <figure ng-click="register.registerWithEmail()"><img class="register-icon" src="assets/images/email.svg" /></figure>
-                    </div>
-                </div>
-                <form name="RegisterForm" ng-submit="register.submit()" ng-if="register.showEmailForm">
+                <form name="RegisterForm" ng-submit="register.submit()">
                     <div class="form-group">
                         <label for="Email">Email</label>
                         <input type="text" class="form-control" id="Email" ng-model="register.credentials.Email" ng-required="true" />

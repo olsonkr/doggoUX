@@ -9,12 +9,25 @@
     button[type='submit'] {
       width: 100%;
     }
-    .panel-body {
-      padding-bottom: 0;
+
+    .login-icon {
+      height: 75px;
+      width: 75px;
+      opacity: 1;
+      transition: opacity .25s ease-in-out;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
     }
-    .panel-footer {
-      padding-top: 0;
+    .login-icon.disabled {
+      opacity: 0.2;
     }
+    .login-icon:hover {
+      opacity: 1;
+    }
+  }
+
+  form[name='LoginForm'] {
+    margin-top: 20px;
   }
 
   .help-block {

@@ -6,22 +6,44 @@
             </figure>
         </a>
         <div class="panel panel-default">
-            <form class="panel-body" name="LoginForm" ng-submit="login.submit()" >
-                <div class="form-group">
-                    <label for="Email">Email</label>
-                    <input type="text" class="form-control" id="Email" ng-model="login.credentials.Email" ng-required="true" />
+            <div class="panel-body">
+                <div class="row text-center">
+                    <div class="col-sm-6">
+                        <figure ng-click="login.loginWithGoogle()">
+                            <img class="login-icon" ng-class="{'disabled': login.showEmailForm}" src="assets/images/google.svg"/>
+                        </figure>
+                    </div>
+                    <!--<div class="col-sm-4">
+                        <figure ng-click="login.loginWithGitHub()">
+                            <img class="login-icon" ng-class="{'disabled': login.showEmailForm}" src="assets/images/github.svg" />
+                        </figure>
+                    </div>-->
+                    <div class="col-sm-6">
+                        <figure ng-click="login.loginWithEmail()">
+                            <img class="login-icon" src="assets/images/email.svg" />
+                        </figure>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="Password">Password</label>
-                    <input type="password" class="form-control" id="Password" ng-model="login.credentials.Password" ng-required="true" />
-                </div>
-                <div class="form-group text-center">
-                    <button id="submit_login" type="submit" class="btn btn-primary" ng-disabled="LoginForm.$invalid">Submit</button>
-                </div>
-            </form>
-            <div class="panel-footer">
-                New to doggoUX? <a id="register" class="btn btn-link" ui-sref="register">Register</a>
+                <form name="LoginForm" ng-submit="login.submit()" ng-if="login.showEmailForm">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control" id="Email" ng-model="login.credentials.Email" ng-required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" id="Password" ng-model="login.credentials.Password" ng-required="true" />
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="submit_login" type="submit" class="btn btn-primary" ng-disabled="LoginForm.$invalid">Submit</button>
+                    </div>
+                    <div class="text-center">
+                        New to doggoUX? <a id="register" class="btn btn-link" ui-sref="register">Register</a>
+                    </div>
+                </form>
             </div>
+            <!--<div class="panel-footer text-center">
+                New to doggoUX? <a id="register" class="btn btn-link" ui-sref="register">Register</a>
+            </div>-->
         </div>
     </div>
 </main>

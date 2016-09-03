@@ -46,6 +46,53 @@ function AuthService($firebaseAuth) {
 
 function LoginController($state, toastr, AuthService) {
     var vm = this;
+
+    vm.loginWithGoogle = function() {
+        vm.showEmailForm = false;
+        var googleProvider = new firebase.auth.GoogleAuthProvider();
+        googleProvider.addScope('https://www.googleapis.com/auth/plus.login');
+        firebase.auth().signInWithPopup(googleProvider)
+            .then(function(result) {
+                if (result.user.email.indexOf('@four51.com') > -1) {
+                    $state.go('home');
+                } else {
+                    AuthService.FireBaseAuthObject.$deleteUser()
+                        .then(function() {
+                            toastr.error('Google account must be a valid Four51 account', 'Error');
+                        });
+                }
+            })
+            .catch(function(ex) {
+                toastr.error(ex.message, 'Error');
+            });
+    };
+
+    /*vm.loginWithGitHub = function() {
+        vm.showEmailForm = false;
+        var gitHubProvider = new firebase.auth.GithubAuthProvider();
+        gitHubProvider.addScope('user:email');
+        firebase.auth().signInWithPopup(gitHubProvider)
+            .then(function(result) {
+                if (result.user && result.user.providerData[0].email.indexOf('@four51.com') > -1) {
+                    $state.go('home');
+                }
+                else {
+                    AuthService.FireBaseAuthObject.$deleteUser()
+                        .then(function() {
+                            toastr.error('Google Account must be a valid Four51 account', 'Error');
+                        });
+                }
+            })
+            .catch(function(ex) {
+                toastr.error(ex.message, 'Error');
+            });
+    };*/
+
+    vm.showEmailForm = false;
+    vm.loginWithEmail = function() {
+        vm.showEmailForm = !vm.showEmailForm;
+    };
+
     vm.credentials = {
         Email: null,
         Password: null
