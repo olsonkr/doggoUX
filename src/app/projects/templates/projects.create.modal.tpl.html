@@ -1,0 +1,19 @@
+<form class="panel panel-default" name="CreateNewProjectForm" ng-submit="projectsCreateModal.create()" style="margin:0;" autocomplete="off">
+    <div class="panel-heading text-center">
+        <b class="panel-title">Create a Project</b>
+    </div>
+    <div class="panel-body">
+        <fieldset class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="projectsCreateModal.project.Name" required />
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Customer</label>
+            <input type="text" class="form-control" ng-model="projectsCreateModal.project.Customer" required />
+        </fieldset>
+    </div>
+    <div class="panel-footer text-right">
+        <button type="button" class="btn btn-default" ng-click="projectsCreateModal.cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="CreateNewProjectForm.$invalid">Submit</button>
+    </div>
+</form>
