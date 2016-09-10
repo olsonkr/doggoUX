@@ -13,19 +13,25 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th ng-click="projects.selectSortOption('Name')">Name <i ng-if="projects.sortOption == 'Name'" class="fa" ng-class="{'fa-sort-desc': projects.sortReverse, 'fa-sort-asc': !projects.sortReverse}"></i></th>
                     <th>Owner</th>
-                    <th>Date Created</th>
+                    <th ng-click="projects.selectSortOption('DateCreated')">Date Created <i ng-if="projects.sortOption == 'DateCreated'" class="fa" ng-class="{'fa-sort-desc': projects.sortReverse, 'fa-sort-asc': !projects.sortReverse}"></i></th>
                     <th>Last Modified By</th>
-                    <th>Date Last Modified</th>
+                    <th ng-click="projects.selectSortOption('DateLastModified')">Date Last Modified <i ng-if="projects.sortOption == 'DateLastModified'" class="fa" ng-class="{'fa-sort-desc': projects.sortReverse, 'fa-sort-asc': !projects.sortReverse}"></i></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="project in projects.projects | projectfilter:projects.tab:projects.currentUser" ui-sref=".detail({id: project.$id})">
+                <tr ng-repeat="project in projects.projects | projectfilter:projects.tab:projects.currentUser | orderBy:projects.sortOption:projects.sortReverse" ui-sref=".detail({id: project.$id})">
                     <td>{{project.Name}}</td>
-                    <td>{{projects.users[project.CreatedBy].Name + ' (' + projects.users[project.CreatedBy].Email + ')'}}</td>
+                    <td>
+                        <img class="projects-profile-pic" ng-src="{{projects.users[project.CreatedBy].ProfilePic ? ('assets/images/' + projects.users[project.CreatedBy].ProfilePic + '.png') : 'assets/images/doggoIcon.png'}}" ng-style="{'background-color': projects.users[project.CreatedBy].ProfilePicColor}">
+                        {{projects.users[project.CreatedBy].Name + ' (' + projects.users[project.CreatedBy].Email + ')'}}
+                    </td>
                     <td>{{project.DateCreated | date:'short'}}</td>
-                    <td>{{projects.users[project.LastModifiedBy].Name + ' (' + projects.users[project.LastModifiedBy].Email + ')'}}</td>
+                    <td>
+                        <img class="projects-profile-pic" ng-src="{{projects.users[project.LastModifiedBy].ProfilePic ? ('assets/images/' + projects.users[project.LastModifiedBy].ProfilePic + '.png') : 'assets/images/doggoIcon.png'}}" ng-style="{'background-color': (projects.users[project.LastModifiedBy].ProfilePic ? projects.users[project.LastModifiedBy].ProfilePicColor : 'transparent')}">
+                        {{projects.users[project.LastModifiedBy].Name + ' (' + projects.users[project.LastModifiedBy].Email + ')'}}
+                    </td>
                     <td>{{project.DateLastModified | date:'short'}}</td>
                 </tr>
                 </tbody>

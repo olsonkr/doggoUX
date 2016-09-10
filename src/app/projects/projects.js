@@ -54,6 +54,19 @@ function ProjectsController($state, $uibModal, Projects, Users, CurrentUser) {
         vm.tab = tab;
     };
 
+    vm.sortOption = 'DateLastModified';
+    vm.sortReverse = false;
+
+    vm.selectSortOption = function(option) {
+        if (vm.sortOption == option) {
+            vm.sortReverse = !vm.sortReverse;
+        }
+        else {
+            vm.sortOption = option;
+            vm.sortReverse = true;
+        }
+    };
+
     vm.createNew = function() {
         var modalInstance = $uibModal.open({
             templateUrl: 'projects/templates/projects.create.modal.tpl.html',

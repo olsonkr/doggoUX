@@ -4,7 +4,7 @@
             <div class="panel panel-default text-center">
                 <div class="panel-body">
                     <figure class="profile-pic">
-                        <img ng-src="{{profile.profile.ProfilePic ? ('assets/images/' + profile.profile.ProfilePic + '.png') : 'assets/images/doggoIcon.png'}}" ng-class="{'profile-pic-color-1': (profile.profile.ProfilePicColor == '1'), 'profile-pic-color-2': (profile.profile.ProfilePicColor == '2'), 'profile-pic-color-3': (profile.profile.ProfilePicColor == '3'), 'profile-pic-color-4': (profile.profile.ProfilePicColor == '4'), 'profile-pic-color-5': (profile.profile.ProfilePicColor == '5')}" />
+                        <img ng-src="{{profile.profile.ProfilePic ? ('assets/images/' + profile.profile.ProfilePic + '.png') : 'assets/images/doggoIcon.png'}}" ng-style="{'background-color': profile.profile.ProfilePicColor}" />
                     </figure>
                 </div>
                 <div class="panel-footer profile-details">
@@ -46,7 +46,7 @@
                     </div>
                     <div class="row text-center profile-pic-color">
                         <div class="col-sm-2"><div class="color-option" ng-class="{'selected': !profile.profile.ProfilePicColor}" ng-click="profile.selectProfilePicColor(null)"></div></div>
-                        <div class="col-sm-2" ng-repeat="color in ['1', '2', '3', '4', '5']"><div class="color-option" id="{{'color_' + color}}" ng-class="{'selected': profile.profile.ProfilePicColor == color}" ng-click="profile.selectProfilePicColor(color)"></div></div>
+                        <div class="col-sm-2" ng-repeat="color in profile.profilePicColors"><div class="color-option" ng-class="{'selected': profile.profile.ProfilePicColor == color}" ng-style="{'background-color': color}" ng-click="profile.selectProfilePicColor(color)"></div></div>
                     </div>
                 </div>
                 <div class="panel-footer text-center">

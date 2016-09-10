@@ -38,6 +38,13 @@ function ProfileService() {
 function ProfileController(ProfileService, Profile, CurrentUser) {
     var vm = this;
     vm.profile = Profile;
+    vm.profilePicColors = [
+        '#c1ebf8', //blue,
+        '#c1f8ce', //green
+        '#f8cec1', //orange
+        '#f8c1d0', //red
+        '#f8c1eb' //purple
+    ];
 
     vm.editingName = false;
     vm.editName = function() {
