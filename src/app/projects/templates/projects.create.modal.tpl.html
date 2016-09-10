@@ -8,8 +8,10 @@
             <input type="text" class="form-control" ng-model="projectsCreateModal.project.Name" required />
         </fieldset>
         <fieldset class="form-group">
-            <label>Customer</label>
-            <input type="text" class="form-control" ng-model="projectsCreateModal.project.Customer" required />
+            <label>
+                <input type="checkbox" ng-model="projectCreateModal.project.Private" />
+                Private
+            </label>
         </fieldset>
     </div>
     <div class="panel-footer text-right">

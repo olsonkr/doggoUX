@@ -1,0 +1,7 @@
+//TODO:
+
+-Create Users object when registering by email
+-Add Name to email registration
+-Add unknown doggo icon
+-Add more doggo icons and colors
+-Notifications on signups

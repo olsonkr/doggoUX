@@ -21,12 +21,13 @@ function ProfileConfig($stateProvider) {
     ;
 }
 
-function ProfileService(FireBaseDataService) {
+function ProfileService() {
     var service = {
         Save: _save
     };
 
-    function _save(profile, profileCopy) {
+    function _save(profile, profileCopy, currentUser) {
+        profile.Email = currentUser.email;
         profile.Name = profileCopy ? profileCopy.Name : profile.Name;
         profile.$save(profile);
     }
@@ -34,7 +35,7 @@ function ProfileService(FireBaseDataService) {
     return service;
 }
 
-function ProfileController(ProfileService, Profile) {
+function ProfileController(ProfileService, Profile, CurrentUser) {
     var vm = this;
     vm.profile = Profile;
 
@@ -55,7 +56,7 @@ function ProfileController(ProfileService, Profile) {
     };
 
     vm.save = function() {
-        ProfileService.Save(vm.profile, vm.profileCopy);
+        ProfileService.Save(vm.profile, vm.profileCopy, CurrentUser);
         vm.editingName = false;
     };
 }

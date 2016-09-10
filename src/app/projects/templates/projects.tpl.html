@@ -5,8 +5,21 @@
         <li type="button" class="btn btn-primary pull-right" ng-click="projects.createNew()"><i class="fa fa-plus"></i> New Project</li>
     </ul>
     <div class="panel panel-default project-panel">
-        <div class="panel-body">
-            Project List
-        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Date Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="project in projects.projects" ui-sref=".detail({id: project.$id})">
+                    <td>{{project.Name}}</td>
+                    <td>{{projects.users[project.CreatedBy].Name + ' (' + projects.users[project.CreatedBy].Email + ')'}}</td>
+                    <td>{{project.DateLastUpdated | date:'shortDate'}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </article>

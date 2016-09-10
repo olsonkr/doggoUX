@@ -16,6 +16,9 @@ function ProjectsConfig($stateProvider) {
             resolve: {
                 Projects: function($firebaseArray, FireBaseDataService) {
                     return $firebaseArray(FireBaseDataService.Projects)
+                },
+                Users: function($firebaseObject, FireBaseDataService) {
+                    return $firebaseObject(FireBaseDataService.Users);
                 }
             }
         })
@@ -25,17 +28,25 @@ function ProjectsConfig($stateProvider) {
             controller: 'ProjectsDetailCtrl',
             controllerAs: 'projectsDetail',
             resolve: {
-                /*Project: function($stateParams, Projects) {
-                    Projects.$getRecord($stateParams.id);
-                }*/
+                Project: function($q, $stateParams, Projects) {
+                    var deferred = $q.defer();
+
+                    Projects.$loaded().then(function(Projects) {
+                        deferred.resolve(Projects.$getRecord($stateParams.id));
+                    });
+
+                    return deferred.promise;
+                }
             }
         })
     ;
 }
 
-function ProjectsController($state, $uibModal, Projects, CurrentUser) {
+function ProjectsController($state, $uibModal, Projects, Users, CurrentUser) {
     var vm = this;
     vm.projects = Projects;
+    vm.users = Users;
+    vm.currentUser = CurrentUser;
 
     vm.tab = 'all';
     vm.selectTab = function(tab) {
@@ -67,7 +78,7 @@ function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser)
     var vm = this;
     vm.project = {
         Name: null,
-        Customer: null,
+        Private: false,
         CreatedBy: CurrentUser.uid,
         DateCreated: new Date().toJSON(),
         DateLastUpdated: new Date().toJSON()
@@ -85,9 +96,10 @@ function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser)
     };
 }
 
-function ProjectsDetailController(, Projects) {
+function ProjectsDetailController(Project, Projects) {
     var vm = this;
-    vm.project = null //Project;
+    vm.project = Project;
+    vm.projects = Projects;
 
     vm.save = function() {
         Projects.$save(vm.project)
