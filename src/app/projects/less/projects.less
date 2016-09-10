@@ -1,9 +1,24 @@
 #Projects {
   margin-top: 30px;
+  height: 100vh;
+
+  @media(min-width:@screen-md-min) {
+    background: url('../images/computer-doggo.png') no-repeat right bottom;
+  }
 
   .project-panel {
     background-color: #fff;
     border-top-color: transparent;
+  }
+
+  .nav-tabs > li > a {
+    color: @text-muted;
+  }
+
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    color: @brand-primary;
   }
 }
 

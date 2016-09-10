@@ -1,25 +1,35 @@
-<article id="Projects" class="container-fluid" ui-view>
-    <ul class="nav nav-tabs">
-        <li role="presentation" ng-class="{'active': projects.tab == 'all'}"><a href="#" ng-click="projects.selectTab('all')">All Projects</a></li>
-        <li role="presentation" ng-class="{'active': projects.tab == 'yours'}"><a href="#" ng-click="projects.selectTab('yours')">Your Projects</a></li>
-        <li type="button" class="btn btn-primary pull-right" ng-click="projects.createNew()"><i class="fa fa-plus"></i> New Project</li>
-    </ul>
-    <div class="panel panel-default project-panel">
-        <table class="table table-hover">
-            <thead>
+<ui-view>
+    <article id="Projects" class="container-fluid">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="{'active': projects.tab == 'shared'}">
+                <a href="#" ng-click="projects.selectTab('shared')">Shared Projects</a>
+            </li>
+            <li role="presentation" ng-class="{'active': projects.tab == 'yours'}">
+                <a href="#" ng-click="projects.selectTab('yours')">Your Projects</a>
+            </li>
+            <li type="button" class="btn btn-primary pull-right" ng-click="projects.createNew()"><i class="fa fa-plus"></i> New Project</li>
+        </ul>
+        <div class="panel panel-default project-panel">
+            <table class="table table-hover">
+                <thead>
                 <tr>
                     <th>Name</th>
                     <th>Owner</th>
-                    <th>Date Last Updated</th>
+                    <th>Date Created</th>
+                    <th>Last Modified By</th>
+                    <th>Date Last Modified</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="project in projects.projects" ui-sref=".detail({id: project.$id})">
+                </thead>
+                <tbody>
+                <tr ng-repeat="project in projects.projects | projectfilter:projects.tab:projects.currentUser" ui-sref=".detail({id: project.$id})">
                     <td>{{project.Name}}</td>
                     <td>{{projects.users[project.CreatedBy].Name + ' (' + projects.users[project.CreatedBy].Email + ')'}}</td>
-                    <td>{{project.DateLastUpdated | date:'shortDate'}}</td>
+                    <td>{{project.DateCreated | date:'short'}}</td>
+                    <td>{{projects.users[project.LastModifiedBy].Name + ' (' + projects.users[project.LastModifiedBy].Email + ')'}}</td>
+                    <td>{{project.DateLastModified | date:'short'}}</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-</article>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</ui-view>

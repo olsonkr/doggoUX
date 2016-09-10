@@ -3,6 +3,7 @@ angular.module('doggoUX')
     .controller('ProjectsCtrl', ProjectsController)
     .controller('ProjectsCreateModalCtrl', ProjectsCreateModalController)
     .controller('ProjectsDetailCtrl', ProjectsDetailController)
+    .filter('projectfilter', projectfilter)
 ;
 
 function ProjectsConfig($stateProvider) {
@@ -48,7 +49,7 @@ function ProjectsController($state, $uibModal, Projects, Users, CurrentUser) {
     vm.users = Users;
     vm.currentUser = CurrentUser;
 
-    vm.tab = 'all';
+    vm.tab = 'shared';
     vm.selectTab = function(tab) {
         vm.tab = tab;
     };
@@ -81,7 +82,8 @@ function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser)
         Private: false,
         CreatedBy: CurrentUser.uid,
         DateCreated: new Date().toJSON(),
-        DateLastUpdated: new Date().toJSON()
+        LastModifiedBy: CurrentUser.uid,
+        DateLastModified: new Date().toJSON()
     };
 
     vm.cancel = function() {
@@ -99,7 +101,6 @@ function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser)
 function ProjectsDetailController(Project, Projects) {
     var vm = this;
     vm.project = Project;
-    vm.projects = Projects;
 
     vm.save = function() {
         Projects.$save(vm.project)
@@ -107,4 +108,21 @@ function ProjectsDetailController(Project, Projects) {
                 $state.go('projects');
             });
     };
+}
+
+function projectfilter() {
+    return function(projects, tab, currentUser) {
+        var result = [];
+
+        angular.forEach(projects, function(project) {
+            if (tab == 'yours' && project.CreatedBy == currentUser.Details.$id) {
+                result.push(project);
+            }
+            else if (tab == 'shared' && !project.Private) {
+                result.push(project);
+            }
+        });
+
+        return result;
+    }
 }
