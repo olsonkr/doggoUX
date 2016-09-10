@@ -33,3 +33,36 @@
   }
 }
 
+#ProjectsCreate {
+  form[name='projectDetailForm'] {
+    textarea {
+      min-height: 200px;
+    }
+  }
+
+  .help-block {
+    font-weight: normal;
+    color: gray;
+  }
+
+  .analyzed-goal {
+    p {
+      font-size: 2em;
+      color: @doggo-gray;
+    }
+    span.goal-word {
+      padding-left: 5px;
+      padding-right: 5px;
+      border-radius: 10px;
+    }
+    span.goal-word:hover {
+      cursor: pointer;
+      background-color: lighten(#0DD5FC, 30%);
+
+    }
+    span.word-selected {
+      background-color: #0DD5FC;
+    }
+  }
+}
+

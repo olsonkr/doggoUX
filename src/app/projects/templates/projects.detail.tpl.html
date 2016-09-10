@@ -1,5 +1,24 @@
-<article id="ProjectsCreate" class="container-fluid">
+<article id="ProjectsCreate" class="container">
     <div class="page-header">
-        <h1>Project</h1>
+        <h1>{{projectDetail.project.Name}}</h1>
+    </div>
+    <div class="row">
+        <form name="projectDetailForm">
+            <div class="form-group">
+                <label>Project Goals</label>
+                <p class="help-block">Example: Provide doggos an interactive map allowing them to log where they have buried their bones.</p>
+                <textarea class="form-control" ng-model="projectDetail.project.Goal" ng-if="!projectDetail.project.GoalAnalyzed"></textarea>
+            </div>
+            <button type="button" class="btn btn-info pull-right" ng-if="projectDetail.project.Goal && !projectDetail.project.GoalAnalyzed" ng-click="projectDetail.analyzeGoal()">Analyze</button>
+            <div class="form-group analyzed-goal panel panel-default panel-body" ng-if="projectDetail.project.GoalAnalyzed">
+                <p>
+                    <span ng-repeat="word in projectDetail.project.AnalyzedGoal">
+                        <span class="goal-word" ng-class="{'word-selected': word.Selected}" ng-click="word.Selected = !word.Selected">{{word.Word}}</span>
+                        <span class="goal-word-space" ng-if="($index + 1) < projectDetail.project.AnalyzedGoal.length"> </span>
+                    </span>
+                </p>
+            </div>
+            <button type="button" class="btn btn-info pull-right" ng-if="projectDetail.project.GoalAnalyzed" ng-click="projectDetail.editGoal()">Edit Goal</button>
+        </form>
     </div>
 </article>

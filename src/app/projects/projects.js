@@ -1,8 +1,8 @@
 angular.module('doggoUX')
     .config(ProjectsConfig)
     .controller('ProjectsCtrl', ProjectsController)
-    .controller('ProjectsCreateModalCtrl', ProjectsCreateModalController)
-    .controller('ProjectsDetailCtrl', ProjectsDetailController)
+    .controller('ProjectCreateModalCtrl', ProjectCreateModalController)
+    .controller('ProjectDetailCtrl', ProjectDetailController)
     .filter('projectfilter', projectfilter)
 ;
 
@@ -26,8 +26,8 @@ function ProjectsConfig($stateProvider) {
         .state('projects.detail', {
             url: '/detail/:id',
             templateUrl: 'projects/templates/projects.detail.tpl.html',
-            controller: 'ProjectsDetailCtrl',
-            controllerAs: 'projectsDetail',
+            controller: 'ProjectDetailCtrl',
+            controllerAs: 'projectDetail',
             resolve: {
                 Project: function($q, $stateParams, Projects) {
                     var deferred = $q.defer();
@@ -70,8 +70,8 @@ function ProjectsController($state, $uibModal, Projects, Users, CurrentUser) {
     vm.createNew = function() {
         var modalInstance = $uibModal.open({
             templateUrl: 'projects/templates/projects.create.modal.tpl.html',
-            controller: 'ProjectsCreateModalCtrl',
-            controllerAs: 'projectsCreateModal',
+            controller: 'ProjectCreateModalCtrl',
+            controllerAs: 'projectCreateModal',
             resolve: {
                 Projects: function() {
                     return vm.projects;
@@ -88,7 +88,7 @@ function ProjectsController($state, $uibModal, Projects, Users, CurrentUser) {
     };
 }
 
-function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser) {
+function ProjectCreateModalController($uibModalInstance, Projects, CurrentUser) {
     var vm = this;
     vm.project = {
         Name: null,
@@ -111,9 +111,28 @@ function ProjectsCreateModalController($uibModalInstance, Projects, CurrentUser)
     };
 }
 
-function ProjectsDetailController(Project, Projects) {
+function ProjectDetailController(Project, Projects) {
     var vm = this;
     vm.project = Project;
+
+    vm.project.AnalyzedGoal = [];
+    vm.project.GoalAnalyzed = false;
+    vm.analyzeGoal = function() {
+        if (!vm.project.Goal) return;
+
+        vm.project.GoalAnalyzed = false;
+        vm.project.AnalyzedGoal = [];
+        var words = vm.project.Goal.split(' ');
+        angular.forEach(words, function(word) {
+            vm.project.AnalyzedGoal.push({Word: word, Selected: false});
+        });
+        vm.project.GoalAnalyzed = true;
+    };
+
+    vm.editGoal = function() {
+        vm.project.AnalyzedGoal = [];
+        vm.project.GoalAnalyzed = false;
+    };
 
     vm.save = function() {
         Projects.$save(vm.project)
