@@ -2,10 +2,6 @@
   margin-top: 30px;
   height: 100vh;
 
-  @media(min-width:@screen-md-min) {
-    background: url('../images/computer-doggo.png') no-repeat right bottom;
-  }
-
   .project-panel {
     background-color: #fff;
     border-top-color: transparent;
@@ -62,6 +58,20 @@
     }
     span.word-selected {
       background-color: #0DD5FC;
+    }
+  }
+}
+
+@media(min-width:@screen-md-min) {
+  .background-doggo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: .4;
+
+    img {
+      max-width: 60%;
+      float: right;
     }
   }
 }
