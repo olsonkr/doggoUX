@@ -33,4 +33,16 @@
   .help-block {
     display: none;
   }
+
+  @keyframes animatedBackground {
+    0% { left: -100%; }
+    100% { left: 200%; }
+  }
+
+  .doggo-runs {
+    position: absolute;
+    bottom: 0;
+
+    animation: animatedBackground 10s linear infinite;
+  }
 }
